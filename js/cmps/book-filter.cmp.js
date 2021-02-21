@@ -1,6 +1,6 @@
 export default {
     template: `
-    <section class="book-filter">
+    <section class="book-filter-container flex justify-center align-center">
         <label> Search a book: </label>    
         <input type="text" @input="setFilter" placeholder="Enter a book title..." v-model="filterBy.byTitle">
         <label> From price: </label>    
