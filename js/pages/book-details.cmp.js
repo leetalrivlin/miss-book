@@ -1,4 +1,4 @@
-
+import longText from '../cmps/long-text.cmp.js';
 export default {
     props:['book'],
     template:`
@@ -7,17 +7,37 @@ export default {
 
         <img src="../img/sale-sign.png" v-if="book.listPrice.isOnSale" class="sale-sign" />
 
-        <p>Title: {{book.title}}</p>
-        <p>Subtitle: {{book.subtitle}}</p>
-        <p>Authors: {{book.authors[0]}}</p>
-        <p>Published Date: {{book.publishedDate}} <span>{{publishedDisplay}}</span></p>
-        <p>Description: {{book.description}}</p>
-        <p>Page Count: {{book.pageCount}} <span>{{pageCountDisplay}}</span></p>
-        <p>Categories: {{book.categories[0]}}</p>
-        <p>Image: {{book.thumbnail}}</p>
-        <p>Language: {{book.language}}</p>
-        <p>Price: <span :class="className">{{showCurrencyNumber}}</span></p>
-        <p>Currency Symbol: {{book.listPrice.currencyCode}}</p> 
+        <h1>{{book.title}}</h1>
+        <img :src="book.thumbnail" class="book-img"/>
+        <p>
+            <span class="detail-title">Subtitle:</span> 
+            {{book.subtitle}}
+        </p>
+        <p>
+            <span class="detail-title">Price: </span>
+            <span :class="className">{{showCurrencyNumber}}</span>
+        </p>
+        <ul><span class="detail-title">Authors: </span>
+            <li v-for="(author, idx) in book.authors" :key="idx">{{author}}</li>
+        </ul>
+        <p>
+            <span class="detail-title">Published Date: </span>
+            {{book.publishedDate}} 
+            <span>{{publishedDisplay}}</span>
+        </p>
+        <long-text :txt="book.description"/>
+        <p>
+            <span class="detail-title">Page Count: </span>
+            {{book.pageCount}} 
+            <span>{{pageCountDisplay}}</span>
+        </p>
+        <ul><span class="detail-title">Categories: </span>
+            <li v-for="(category, indx) in book.categories" :key="indx">{{category}}</li>
+        </ul>
+        <p>
+            <span class="detail-title">Language: </span>
+            {{book.language}}
+        </p>
     </section>
     `,
     data() {
@@ -51,7 +71,7 @@ export default {
     
     },
     components: {
-      
+        longText,
     },
     created() {
        

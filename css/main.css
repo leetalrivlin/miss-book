@@ -92,29 +92,67 @@ p {
 
 .book-details-container {
   position: fixed;
-  background-color: mediumpurple;
+  background-color: rgb(209, 191, 245);
+  text-align: center;
   padding: 20px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.x-btn {
+.book-details-container h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.book-details-container p,
+.book-details-container ul {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.book-details-container .x-btn {
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer;
 }
 
-.red {
+.book-details-container .sale-sign {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 80px;
+   }
+
+.book-details-container .book-img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.book-details-container .detail-title {
+    font-weight: bold;
+}
+
+.book-details-container ul {
+    margin-block-start: 0;
+    padding-inline-start: 0;
+}
+
+.book-details-container .red {
     color: red;
 }
 
-.green {
+.book-details-container .green {
     color: green;
 }
 
-.sale-sign {
- width: 100px;
- margin-bottom: 20px;
+
+
+.show-more-btn {
+    background: none;
+    border: none;
+    outline: none;
+    color: red;
+    cursor: pointer;
 }
