@@ -8,7 +8,7 @@ export default {
     template: `
         <section class="book-app">
             <book-filter @filtered="setFilter" />
-            <book-list :books="booksToShow" @selected="selectBook" @remove="removeBook"/>
+            <book-list v-if="!selectedBook" :books="booksToShow" @selected="selectBook" @remove="removeBook"/>
             <book-details v-if="selectedBook" :book="selectedBook" @close="selectedBook = null"/>
         </section>
     `,
