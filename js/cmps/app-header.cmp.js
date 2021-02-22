@@ -7,7 +7,7 @@ export default {
                 <h1>Miss Book</h1>
             </div>
             <nav>
-            <router-link active-class="active-link" to="/" exact>Home</router-link> |
+            <router-link to="/" exact>Home</router-link> |
             <router-link to="/book">Books</router-link> |
             <router-link to="/about">About</router-link>
         </nav>

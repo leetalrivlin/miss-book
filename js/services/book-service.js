@@ -1,4 +1,5 @@
 import { utilService } from './util-service.js';
+import { storageService } from './async-storage-service.js';
 
 const gBooks = [
     {
@@ -445,9 +446,11 @@ const gBooks = [
 const BOOKS_KEY = 'books';
 
 export const bookService = {
-    query,
     _createBooks,
+    query,
     remove,
+    save,
+    getById
 }
 
 function _createBooks() {
@@ -460,11 +463,25 @@ function _createBooks() {
 }
 
 function query() {
-  return gBooks;
+  // return gBooks;
+  return storageService.query(BOOKS_KEY);
 }
 
 function remove(bookId) {
-  const idx = gBooks.findIndex(book => book.id === bookId);
-  gBooks.splice(idx, 1);
-  utilService.saveToStorage(BOOKS_KEY, gBooks);
+  // const idx = gBooks.findIndex(book => book.id === bookId);
+  // gBooks.splice(idx, 1);
+  // utilService.saveToStorage(BOOKS_KEY, gBooks);
+  return storageService.remove(BOOKS_KEY, bookId);
+}
+
+function save(book) {
+  if (book.id) {
+      return storageService.put(BOOKS_KEY, book);
+  } else {
+      return storageService.post(BOOKS_KEY, book);
+  }
+}
+
+function getById(id) {
+  return storageService.get(CARS_KEY, id)
 }

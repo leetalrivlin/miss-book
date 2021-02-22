@@ -1,6 +1,7 @@
 import longText from '../cmps/long-text.cmp.js';
+import {bookService} from '../services/book-service.js';
+
 export default {
-  props: ['book'],
   template: `
     <section class="book-details-container">
         <button @click="$emit('close')" class="x-btn">X</button>
@@ -40,6 +41,11 @@ export default {
         </p>
     </section>
     `,
+    data() {
+      return {
+          book: null,
+      }
+  },
   computed: {
     titleUpperCase() {
       return this.book.title.charAt(0).toUpperCase() + this.book.title.substring(1);
@@ -71,4 +77,9 @@ export default {
   components: {
     longText,
   },
+  created() {
+    const id = this.$route.params.bookId
+        carService.getById(id)
+            .then(book => this.book = book)
+  }
 };
