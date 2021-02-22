@@ -48,6 +48,7 @@ export default {
         bookDetails,
     },
     created() {
+        bookService._createBooks();
         this.books = bookService.query();
     }
 }
