@@ -380,7 +380,14 @@ export const bookService = {
 };
 
 function addReview(bookId, review) {
-  console.log('adding a review to id:',bookId,'review:',review);
+  return getById(bookId)
+    .then(book => {
+      if (!book.reviews || !book.reviews.length) {
+        book.reviews = [];
+      }
+      book.reviews.unshift(review);
+      return book;
+    })
 }
 
 function query() {

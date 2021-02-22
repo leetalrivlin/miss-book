@@ -3,6 +3,7 @@ import reviewAdd from '../cmps/review-add.cmp.js';
 import {bookService} from '../services/book-service.js';
 
 export default {
+  name: 'bookDetails',
   template: `
     <section v-if="book" class="book-details-container app-main">
         <!-- <button @click="$emit('close')" class="x-btn">X</button> -->

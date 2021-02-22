@@ -296,7 +296,8 @@ input::-webkit-inner-spin-button {
   margin: 10px auto 50px auto;
   text-align: left;
 }
-.review-add-container form label {
+.review-add-container form label,
+.review-add-container form button {
   margin-top: 10px;
   margin-bottom: 3px;
 }
