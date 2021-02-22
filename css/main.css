@@ -28,6 +28,10 @@ p {
   margin: 0;
 }
 
+.app-main {
+  min-height: 90vh;
+}
+
 /* HELPERS */
 
 /* flex helpers */
@@ -265,6 +269,14 @@ input::-webkit-inner-spin-button {
   outline: none;
   color: red;
   cursor: pointer;
+}
+
+/* FOOTER */
+
+footer {
+  background-color: #f6f5f5a4;
+  padding: 15px;
+  text-align: center;
 }
 
 /* MEDIUM SIZE */
