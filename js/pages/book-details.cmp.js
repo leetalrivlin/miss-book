@@ -3,8 +3,9 @@ import {bookService} from '../services/book-service.js';
 
 export default {
   template: `
-    <section class="book-details-container">
-        <button @click="$emit('close')" class="x-btn">X</button>
+    <section v-if="book" class="book-details-container">
+        <!-- <button @click="$emit('close')" class="x-btn">X</button> -->
+        <router-link to="/book">Back</router-link>
 
         <img src="../img/sale-sign.png" v-if="book.listPrice.isOnSale" class="sale-sign" />
 
@@ -79,7 +80,7 @@ export default {
   },
   created() {
     const id = this.$route.params.bookId
-        carService.getById(id)
+        bookService.getById(id)
             .then(book => this.book = book)
   }
 };

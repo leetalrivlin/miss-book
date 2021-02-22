@@ -1,5 +1,4 @@
 import {bookService} from '../services/book-service.js';
-
 import bookFilter from '../cmps/book-filter.cmp.js';
 import bookList from '../cmps/book-list.cmp.js';
 import bookDetails from './book-details.cmp.js';
@@ -9,7 +8,7 @@ export default {
         <section class="book-app">
             <book-filter @filtered="setFilter" />
             <book-list v-if="!selectedBook" :books="booksToShow" @selected="selectBook" @remove="removeBook"/>
-            <book-details v-if="selectedBook" :book="selectedBook" @close="selectedBook = null"/>
+            <!-- <book-details v-if="selectedBook" :book="selectedBook" @close="selectedBook = null"/> -->
         </section>
     `,
     data() {
@@ -20,6 +19,10 @@ export default {
         }
     },
     methods: {
+        loadBooks() {
+            bookService.query()
+                .then(books => this.books = books)
+        },
         setFilter(filterBy) {
             this.filterBy = filterBy;
         },
@@ -27,7 +30,9 @@ export default {
             this.selectedBook = book;
         },
         removeBook(bookId) {
+            // 
             bookService.remove(bookId)
+                .then(this.loadBooks)
         },
     },
     computed: {
@@ -48,7 +53,8 @@ export default {
         bookDetails,
     },
     created() {
-        bookService._createBooks();
-        this.books = bookService.query();
+        // bookService._createBooks();
+        // this.books = bookService.query();
+        this.loadBooks();
     }
 }
