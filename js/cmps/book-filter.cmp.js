@@ -1,12 +1,20 @@
 export default {
     template: `
-    <section class="book-filter-container flex justify-center align-center">
-        <label> Search a book: </label>    
-        <input type="text" @input="setFilter" placeholder="Enter a book title..." v-model="filterBy.byTitle">
-        <label> From price: </label>    
-        <input type="number" @input="setFilter" v-model.number="filterBy.fromPrice"/>
-        <label> To price: </label>    
-        <input type="number" @input="setFilter" v-model.number="filterBy.toPrice"/>
+    <section class="book-filter-container">
+        <section class="book-filter main-width flex justify-left">
+            <label> Search a book: </label>    
+            <input type="search" @input="setFilter" placeholder="Enter a book title..." v-model="filterBy.byTitle">
+            <div class="price-inputs flex">
+                <div>
+                    <label> From price: </label>    
+                    <input type="number" @input="setFilter" v-model.number="filterBy.fromPrice"/>
+                </div>
+                <div>
+                    <label> To price: </label>    
+                    <input type="number" @input="setFilter" v-model.number="filterBy.toPrice"/>
+                </div>
+            </div>
+        </section>
     </section>
     `,
     data() {

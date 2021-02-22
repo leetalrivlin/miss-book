@@ -3,12 +3,12 @@ import bookPreview from './book-preview.cmp.js';
 export default {
     props: ['books'],
     template: `
-    <ul class="book-list-container flex flex-wrap clean-list justify-center">
+    <ul class="book-list-container main-width flex flex-wrap clean-list space-around">
         <li v-for="book in books" :key="book.id" class="book-preview-container flex column space-between" >
             <book-preview :book="book" @click.native="select(book)" />
-            <div class="btns-container flex justify-center">
-                <button @click="remove(book.id)" class="btn">Delete book</button>
-                <button @click="select(book)" class="btn">Details</button>
+            <div class="btns-container flex justify-center align-center">
+                <button @click="remove(book.id)" class="btn delete-btn"><i class="fa fa-trash btn-icon"></i></button>
+                <button @click="select(book)" class="btn details-btn"><i class="fa fa-eye btn-icon"></i></button>
             </div>
         </li>
     </ul>

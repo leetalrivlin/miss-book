@@ -1,13 +1,13 @@
 import longText from '../cmps/long-text.cmp.js';
 export default {
-    props:['book'],
-    template:`
+  props: ['book'],
+  template: `
     <section class="book-details-container">
         <button @click="$emit('close')" class="x-btn">X</button>
 
         <img src="../img/sale-sign.png" v-if="book.listPrice.isOnSale" class="sale-sign" />
 
-        <h1>{{book.title}}</h1>
+        <h1>{{titleUpperCase}}</h1>
         <img :src="book.thumbnail" class="book-img"/>
         <p>
             <span class="detail-title">Subtitle:</span> 
@@ -40,40 +40,35 @@ export default {
         </p>
     </section>
     `,
-    data() {
-        return {
-        }
+  computed: {
+    titleUpperCase() {
+      return this.book.title.charAt(0).toUpperCase() + this.book.title.substring(1);
     },
-    methods: {
-
+    pageCountDisplay() {
+      let str = '';
+      if (this.book.pageCount > 500) str = '- Long reading';
+      if (this.book.pageCount > 200) str = '- Decent Reading';
+      if (this.book.pageCount < 100) str = '- Light Reading';
+      return str;
     },
-    computed: {
-        pageCountDisplay() {
-            let str = '';
-            if (this.book.pageCount > 500)  str = '- Long reading';
-            if (this.book.pageCount > 200 )  str = '- Decent Reading';
-            if (this.book.pageCount < 100 )  str = '- Light Reading';
-            return str;
-        },
-        publishedDisplay() {
-            let str = '';
-            if (this.book.publishedDate > 10) str = '- Veteran Book';
-            if (this.book.publishedDate < 1) str = '- New!';
-            return str;
-        },
-        showCurrencyNumber() {
-            return this.book.listPrice.amount.toLocaleString('de-DE', { style: 'currency', currency: this.book.listPrice.currencyCode })
-        },
-        className() {
-           if (this.book.listPrice.amount > 150) return 'red';
-           if (this.book.listPrice.amount < 20) return 'green';
-        }
-    
+    publishedDisplay() {
+      let str = '';
+      if (this.book.publishedDate > 10) str = '- Veteran Book';
+      if (this.book.publishedDate < 1) str = '- New!';
+      return str;
     },
-    components: {
-        longText,
+    showCurrencyNumber() {
+      return this.book.listPrice.amount.toLocaleString('de-DE', {
+        style: 'currency',
+        currency: this.book.listPrice.currencyCode,
+      });
     },
-    created() {
-       
-    }
-}
+    className() {
+      if (this.book.listPrice.amount > 150) return 'red';
+      if (this.book.listPrice.amount < 20) return 'green';
+    },
+  },
+  components: {
+    longText,
+  },
+};

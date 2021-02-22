@@ -3,8 +3,8 @@ export default {
     template:`
     <section class="book-preview">
         <img :src="book.thumbnail" class="preview-img"/>
-        <p>Title: {{book.title}}</p>
-        <p>Price: {{showCurrencyNumber}}</p>
+        <h4>{{book.title}}</h4>
+        <p>{{showCurrencyNumber}}</p>
     </section>
     `,
     computed: {
