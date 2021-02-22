@@ -376,7 +376,12 @@ export const bookService = {
   remove,
   save,
   getById,
+  addReview,
 };
+
+function addReview(bookId, review) {
+  console.log('adding a review to id:',bookId,'review:',review);
+}
 
 function query() {
   return storageService.query(BOOKS_KEY)

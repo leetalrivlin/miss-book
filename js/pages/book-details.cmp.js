@@ -1,45 +1,32 @@
 import longText from '../cmps/long-text.cmp.js';
+import reviewAdd from '../cmps/review-add.cmp.js';
 import {bookService} from '../services/book-service.js';
 
 export default {
   template: `
-    <section v-if="book" class="book-details-container">
+    <section v-if="book" class="book-details-container app-main">
         <!-- <button @click="$emit('close')" class="x-btn">X</button> -->
-        <router-link to="/book">Back</router-link>
+        <router-link to="/book" class="back-btn">Back</router-link>
 
         <img src="../img/sale-sign.png" v-if="book.listPrice.isOnSale" class="sale-sign" />
 
         <h1>{{titleUpperCase}}</h1>
         <img :src="book.thumbnail" class="book-img"/>
-        <p>
-            <span class="detail-title">Subtitle:</span> 
-            {{book.subtitle}}
-        </p>
-        <p>
-            <span class="detail-title">Price: </span>
-            <span :class="className">{{showCurrencyNumber}}</span>
-        </p>
+        <p><span class="detail-title">Subtitle:</span> {{book.subtitle}}</p>
+        <p><span class="detail-title">Price: </span><span :class="className">{{showCurrencyNumber}}</span></p>
         <ul><span class="detail-title">Authors: </span>
-            <li v-for="(author, idx) in book.authors" :key="idx">{{author}}</li>
+          <li v-for="(author, idx) in book.authors" :key="idx">{{author}}</li>
         </ul>
-        <p>
-            <span class="detail-title">Published Date: </span>
-            {{book.publishedDate}} 
-            <span>{{publishedDisplay}}</span>
-        </p>
+        <p><span class="detail-title">Published Date: </span>{{book.publishedDate}} <span>{{publishedDisplay}}</span></p>
         <long-text :txt="book.description"/>
-        <p>
-            <span class="detail-title">Page Count: </span>
-            {{book.pageCount}} 
-            <span>{{pageCountDisplay}}</span>
+        <p><span class="detail-title">Page Count: </span>{{book.pageCount}} <span>{{pageCountDisplay}}</span>
         </p>
         <ul><span class="detail-title">Categories: </span>
             <li v-for="(category, indx) in book.categories" :key="indx">{{category}}</li>
         </ul>
-        <p>
-            <span class="detail-title">Language: </span>
-            {{book.language}}
-        </p>
+        <p><span class="detail-title">Language: </span>{{book.language}}</p>
+        <hr />
+        <review-add :bookId="book.id"/>
     </section>
     `,
     data() {
@@ -77,6 +64,7 @@ export default {
   },
   components: {
     longText,
+    reviewAdd,
   },
   created() {
     const id = this.$route.params.bookId

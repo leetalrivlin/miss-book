@@ -16,11 +16,6 @@ export default {
         </li>
     </ul>
     `,
-    data() {
-        return {
-
-        }
-    },
     methods: {
         remove(bookId) {
             bookService.remove(bookId)
@@ -29,8 +24,8 @@ export default {
                         txt: 'Book removed succesfully',
                         type: 'success'
                     }
-                    eventBus.$emit('show-msg', msg)
-                    // .then(this.books = bookService.query());
+                    eventBus.$emit('show-msg', msg);
+                    eventBus.$emit('reloadBooks');
                 })
                 .catch(err =>{
                     console.log(err);
@@ -40,6 +35,7 @@ export default {
                     }
                     eventBus.$emit('show-msg', msg)
                 })
+                
         },
         select(book) {
             this.$emit('selected', book)
