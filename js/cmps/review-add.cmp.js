@@ -12,7 +12,7 @@ export default {
                 <input type="text" placeholder="Enter Full Name" v-model="review.userName" name="fullName" ref="fullName">
                 <label for="rating">Your Rating:</label>
                 <select v-model.number="review.rate">
-                    <option v-for="num in numbers" :key="num" name="rating">{{num}}</option>
+                    <option v-for="star in stars" :key="star" name="rating">{{star}}</option>
                 </select>
                 <label for="readAt">Read the book at:</label>
                 <input type="date" name="readAt" v-model="review.readAt"/>
@@ -36,7 +36,7 @@ export default {
     `,
     data() {
         return {
-            numbers: [1, 2, 3, 4, 5],
+            stars: ['⭐', '⭐⭐' ,'⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'],
             review: {
                 userName: 'Books Reader',
                 rate: 0,
