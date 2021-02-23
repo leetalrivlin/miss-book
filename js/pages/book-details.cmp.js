@@ -10,7 +10,7 @@ export default {
         <!-- <button @click="$emit('close')" class="x-btn">X</button> -->
         <router-link to="/book" class="back-btn">Back</router-link>
 
-        <img src="./img/sale-sign.png" v-if="book.listPrice.isOnSale" class="sale-sign" />
+        <img src="img/sale-sign.png" v-if="book.listPrice.isOnSale" class="sale-sign" />
 
         <h1>{{titleUpperCase}}</h1>
         <img :src="book.thumbnail" class="book-img"/>
