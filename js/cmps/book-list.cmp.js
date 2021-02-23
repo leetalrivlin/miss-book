@@ -22,7 +22,8 @@ export default {
                 .then(book => {
                     const msg = {
                         txt: 'Book removed succesfully',
-                        type: 'success'
+                        type: 'success',
+                        link: '',
                     }
                     eventBus.$emit('show-msg', msg);
                     eventBus.$emit('reloadBooks');
@@ -31,7 +32,8 @@ export default {
                     console.log(err);
                     const msg = {
                         txt: 'Error, please try again later',
-                        type: 'error'
+                        type: 'error',
+                        link: '',
                     }
                     eventBus.$emit('show-msg', msg)
                 })
@@ -43,5 +45,5 @@ export default {
     },
     components:{
         bookPreview,
-    }
+    },
 }

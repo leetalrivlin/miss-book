@@ -29,7 +29,7 @@ p {
 }
 
 .app-main {
-  min-height: 90vh;
+  min-height: 80vh;
 }
 
 /* HELPERS */
@@ -86,30 +86,43 @@ input::-webkit-inner-spin-button {
 /* LAYOUT */
 
 .main-width {
-  max-width: 950px;
+  max-width: 970px;
 }
 
 /* COMPONENTS */
+
+/* ROUTES */
+
+.nav-link {
+  color: rgb(20, 16, 16);
+  text-decoration: none;
+  padding: 5px;
+}
+
+.active-link {
+  color: #fccbcb;
+}
+
 
 /* HEADER */
 
 .app-header-container {
   background-color: #838383;
+  height: 10vh;
 }
 
 .app-header {
-  background-color: #838383;
-  padding: 20px;
+  padding: 8px;
   margin: auto;
 }
 
 .app-header .books-logo {
-  width: 60px;
+  width: 40px;
   margin-right: 10px;
 }
 
 .app-header h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #fccbcb;
 }
@@ -163,6 +176,34 @@ input::-webkit-inner-spin-button {
 
 .book-filter input[type='number'] {
   width: 50px;
+}
+
+/* HOME */
+.home-page-container img {
+  width: 100%;
+  object-fit: cover;
+}
+.home-page-container p {
+  position: absolute;
+  top: 140px;
+  left: 150px;
+  margin: auto;
+}
+
+.home-page-container p span {
+  font-size: 0.8rem;
+}
+
+/* ABOUT */
+
+.about-container img {
+  width: 100%;
+}
+
+.about-container p {
+  position: absolute;
+  left: 70%;
+  top: 150px;
 }
 
 /* LIST */

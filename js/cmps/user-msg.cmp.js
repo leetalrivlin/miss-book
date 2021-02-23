@@ -4,6 +4,7 @@ export default {
     template: `
         <section v-if="msg" class="user-msg" :class="msg.type">
             <p>{{msg.txt}}</p>
+            <router-link v-if="msg.link" :to="msg.link">Check it Out</router-link>
         </section>
     `,
     data() {

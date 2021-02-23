@@ -27,13 +27,26 @@ export default {
         </ul>
         <p><span class="detail-title">Language: </span>{{book.language}}</p>
         <hr />
-        <review-add :bookId="book.id"/>
+
+        <review-add :bookId="book.id" v-on:update-details="updateBookDetails"/>
     </section>
     `,
     data() {
       return {
           book: null,
+          reviews: [],
       }
+  },
+  methods: {
+    updateBookDetails() {
+      console.log('Updating in details');
+      const id = this.$route.params.bookId
+      bookService.getById(id)
+          .then(book => {
+            this.book = book
+            console.log('this.book',this.book);
+          }); 
+    }
   },
   computed: {
     titleUpperCase() {
@@ -68,8 +81,10 @@ export default {
     reviewAdd,
   },
   created() {
-    const id = this.$route.params.bookId
-        bookService.getById(id)
-            .then(book => this.book = book)
+    this.updateBookDetails();
+    // const id = this.$route.params.bookId
+    //     bookService.getById(id)
+    //       .then(book => this.book = book)
+    //       .then(book => this.reviews = book.reviews); 
   }
 };

@@ -377,6 +377,7 @@ export const bookService = {
   save,
   getById,
   addReview,
+  removeReview
 };
 
 function addReview(bookId, review) {
@@ -388,6 +389,14 @@ function addReview(bookId, review) {
       book.reviews.unshift(review);
       return book;
     })
+}
+
+function removeReview(bookId, reviewIdx) {
+  return getById(bookId)
+    .then(book => {
+      book.reviews.splice(reviewIdx, 1);
+      return book;
+      })
 }
 
 function query() {
