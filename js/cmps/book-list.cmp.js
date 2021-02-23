@@ -5,7 +5,7 @@ import { eventBus } from '../services/event-bus-service.js';
 export default {
     props: ['books'],
     template: `
-    <ul class="book-list-container main-width flex flex-wrap clean-list space-around">
+    <ul class="book-list-container main-width flex flex-wrap clean-list justify-center">
         <li v-for="book in books" :key="book.id" class="book-preview-container flex column space-between" >
             <book-preview :book="book" @click.native="select(book)" />
             <div class="btns-container flex justify-center align-center">

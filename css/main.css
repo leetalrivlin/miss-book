@@ -220,7 +220,7 @@ input::-webkit-inner-spin-button {
   font-size: 0.8rem;
   border-radius: 10px;
   background-color: #ebecf1;
-  margin-bottom: 20px;
+  margin: 0 10px 20px 10px;
   cursor: pointer;
 }
 
@@ -230,10 +230,11 @@ input::-webkit-inner-spin-button {
 
 .book-preview {
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .book-preview .preview-img {
-  width: 100%;
+  width: 60%;
   margin-bottom: 10px;
   border-radius: 10px;
 }
