@@ -10,8 +10,7 @@ export default {
             <book-preview :book="book" @click.native="select(book)" />
             <div class="btns-container flex justify-center align-center">
                 <button @click="remove(book.id)" class="btn delete-btn"><i class="fa fa-trash btn-icon"></i></button>
-                <router-link :to="'/book/'+book.id">Details</router-link>
-                <!-- <button @click="select(book)" class="btn details-btn"><i class="fa fa-eye btn-icon"></i></button> -->
+                <router-link tag="button" class="btn" :to="'/book/'+book.id"><i class="fa fa-eye btn-icon"></i></router-link>
             </div>
         </li>
     </ul>

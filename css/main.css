@@ -121,10 +121,12 @@ input::-webkit-inner-spin-button {
   margin-right: 10px;
 }
 
-.app-header h1 {
+.app-header .logo {
   font-size: 2rem;
   font-weight: 700;
   color: #fccbcb;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 /* USER - MSG */
@@ -236,7 +238,6 @@ input::-webkit-inner-spin-button {
 .book-preview .preview-img {
   width: 60%;
   margin-bottom: 10px;
-  border-radius: 10px;
 }
 
 .btn {
