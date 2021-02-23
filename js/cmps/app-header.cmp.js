@@ -3,7 +3,7 @@ export default {
     <section class="app-header-container">
         <section class="app-header main-width flex space-between align-center">
             <div class="flex justify-left">
-                <img src="../img/books-logo.png" class="books-logo"/>
+                <img src="img/books-logo.png" class="books-logo"/>
                 <router-link to="/" class="logo" active-class="active-link" exact>Miss book</router-link>
             </div>
             <nav>
