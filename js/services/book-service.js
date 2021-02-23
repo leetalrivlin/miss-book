@@ -383,26 +383,31 @@ export const bookService = {
   getBookFromApi
 };
 
-function getBookFromApi() {
-  gApiBooks = utilService.loadFromStorage(BOOKS_API);
-  if (gApiBooks) return Promise.resolve(gApiBooks);
-  else {
-  return axios.get('https://www.googleapis.com/books/v1/volumes?printType=books&q=HarryPotter')
+function getBookFromApi(value) {
+  // gApiBooks = utilService.loadFromStorage(BOOKS_API);
+  // if (gApiBooks) {
+  //   const searchMatch = gApiBooks.some(book => {
+  //     return book.title.includes(value)
+  //   })
+  //   if (searchMatch) return Promise.resolve(gApiBooks);
+  // }
+  // else {
+  return axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${value}`)
       .then(res => {
-          console.log('Service Got Res:', res.data.items);
+          // console.log('Service Got Res:', res.data.items);
           const apiBooks = res.data.items;
           let newBooks = apiBooks.map(item => {
             return {
-              id: item.volumeInfo.id,
-              title: item.volumeInfo.title,
-              subtitle: item.volumeInfo.subtitle,
+              id: item.volumeInfo.id || utilService.makeId(),
+              title: item.volumeInfo.title || '',
+              subtitle: item.volumeInfo.subtitle || '',
               authors: item.volumeInfo.authors || [],
-              publishedDate: item.volumeInfo.publishedDate,
-              description: item.volumeInfo.description,
+              publishedDate: item.volumeInfo.publishedDate || 1980,
+              description: item.volumeInfo.description || '',
               pageCount: item.volumeInfo.pageCount || 120,
               categories: item.volumeInfo.categories || [],
               thumbnail: (item.volumeInfo.imageLinks) ? item.volumeInfo.imageLinks.thumbnail : 'http://coding-academy.org/books-photos/20.jpg',
-              language: item.volumeInfo.language,
+              language: item.volumeInfo.language || '',
               listPrice: {
                 amount: 80,
                 currencyCode: 'USD',
@@ -411,37 +416,23 @@ function getBookFromApi() {
               reviews: [],
             }
             })
-            console.log('newBooks',newBooks);
-            gApiBooks = newBooks;
-            utilService.saveToStorage(BOOKS_API, gApiBooks) //Until now
+            // console.log('newBooks',newBooks);
+            // if (!gApiBooks || !gApiBooks.length) gApiBooks = [];
+            // newBooks.forEach(book => {
+            //   for (let i = 0; i < gApiBooks.length; i++) {
+            //   if (gApiBooks[i].id !== book.id) {
+            //     gApiBooks.unshift(book);
+            //   }
+            //   }
+            // })
+            // utilService.saveToStorage(BOOKS_API, gApiBooks)
           return newBooks;
           // return res.data.items;
       })
       .catch(err => {
           console.log('Service got Error:', err);
       })
-    }   
-}
-
-function createNewBook() {
-  return {
-    id: '',
-    title: '',
-    subtitle: '',
-    authors: [],
-    publishedDate: 0,
-    description:
-      '',
-    pageCount: 0,
-    categories: [0],
-    thumbnail: '',
-    language: '',
-    listPrice: {
-      amount: 0,
-      currencyCode: '',
-      isOnSale: false,
-    }
-  }
+    // }   
 }
 
 function addReview(bookId, review) {

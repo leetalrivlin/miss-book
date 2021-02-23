@@ -161,6 +161,7 @@ input::-webkit-inner-spin-button {
 
 .book-filter label {
   margin-inline-end: 5px;
+  font-size: 0.8rem;
 }
 
 .book-filter input {
@@ -178,6 +179,24 @@ input::-webkit-inner-spin-button {
 
 .book-filter input[type='number'] {
   width: 50px;
+}
+
+/* BOOK ADD */
+
+.book-add-container input {
+  width: 250px;
+}
+
+.book-add-container .plus-btn {
+  text-align: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.book-add-container .plus-icon {
+  width: 10px;
+  height: 10px;
+  padding: 0;
 }
 
 /* HOME */
