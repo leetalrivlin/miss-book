@@ -91,15 +91,15 @@ export default {
                           })
     },
 
-    updateBookDetails() {
-      console.log('Updating in details');
-      const id = this.$route.params.bookId
-      bookService.getById(id)
-          .then(book => {
-            this.book = book
-            console.log('this.book',this.book);
-          }); 
-    }
+    // updateBookDetails() {
+    //   console.log('Updating in details');
+    //   const id = this.$route.params.bookId
+    //   bookService.getById(id)
+    //       .then(book => {
+    //         this.book = book
+    //         console.log('this.book',this.book);
+    //       }); 
+    // }
   },
   computed: {
     titleUpperCase() {
@@ -134,10 +134,9 @@ export default {
     reviewAdd,
   },
   created() {
-    this.updateBookDetails();
-    // const id = this.$route.params.bookId
-    //     bookService.getById(id)
-    //       .then(book => this.book = book)
-    //       .then(book => this.reviews = book.reviews); 
+    // this.updateBookDetails();
+    const id = this.$route.params.bookId
+        bookService.getById(id)
+          .then(book => this.book = book)
   }
 };

@@ -1,3 +1,4 @@
+import bookAdd from './book-add.cmp.js'
 export default {
     template: `
     <section class="book-filter-container">
@@ -14,9 +15,13 @@ export default {
                     <input type="number" @input="setFilter" v-model.number="filterBy.toPrice"/>
                 </div>
             </div>
+            <book-add>Add New Book</book-add>
         </section>
     </section>
     `,
+    components: {
+        bookAdd,
+    },
     data() {
         return {
             filterBy: {

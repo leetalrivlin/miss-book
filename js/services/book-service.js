@@ -1,6 +1,7 @@
 import { utilService } from './util-service.js';
 import { storageService } from './async-storage-service.js';
 
+var gApiBooks;
 const gBooks = [
   {
     id: 'OXeMG8wNskc',
@@ -370,6 +371,7 @@ const gBooks = [
   },
 ];
 const BOOKS_KEY = 'books';
+const BOOKS_API = 'books-api';
 
 export const bookService = {
   query,
@@ -377,8 +379,66 @@ export const bookService = {
   save,
   getById,
   addReview,
-  removeReview
+  removeReview,
+  getBookFromApi
 };
+
+function getBookFromApi() {
+  gApiBooks = utilService.loadFromStorage(BOOKS_API);
+  if (gApiBooks) return Promise.resolve(gApiBooks);
+  else {
+  return axios.get('https://www.googleapis.com/books/v1/volumes?printType=books&q=HarryPotter')
+      .then(res => {
+          console.log('Service Got Res:', res.data);
+          gApiBooks = res.data.items;
+          utilService.saveToStorage(BOOKS_API, gApiBooks)
+          return res.data.items;
+      })
+      .then(items => items.map(({volumeInfo}) => {
+        return {
+          id: '',
+          title: volumeInfo.title,
+          subtitle: '',
+          authors: volumeInfo.authors,
+          publishedDate: volumeInfo.publishedDate,
+          description: volumeInfo.description,
+          pageCount: volumeInfo.pageCount,
+          categories: [],
+          thumbnail: volumeInfo.imageLinks.thumbnail,
+          language: volumeInfo.language,
+          listPrice: {
+            amount: 80,
+            currencyCode: 'USD',
+            isOnSale: true,
+          }
+        }
+        }))
+      .catch(err => {
+          console.log('Service got Error:', err);
+      })
+    }   
+}
+
+function createNewBook() {
+  return {
+    id: '',
+    title: '',
+    subtitle: '',
+    authors: [],
+    publishedDate: 0,
+    description:
+      '',
+    pageCount: 0,
+    categories: [0],
+    thumbnail: '',
+    language: '',
+    listPrice: {
+      amount: 0,
+      currencyCode: '',
+      isOnSale: false,
+    }
+  }
+}
 
 function addReview(bookId, review) {
   return getById(bookId)
