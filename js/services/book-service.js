@@ -383,10 +383,10 @@ export const bookService = {
 function addReview(bookId, review) {
   return getById(bookId)
     .then(book => {
-      if (!book.reviews || !book.reviews.length) {
-        book.reviews = [];
-      }
       book.reviews.unshift(review);
+      return book;
+    }).then(book => {
+      save(book)
       return book;
     })
 }
@@ -396,18 +396,22 @@ function removeReview(bookId, reviewIdx) {
     .then(book => {
       book.reviews.splice(reviewIdx, 1);
       return book;
+      }).then(book => {
+        save(book)
+        return book;
       })
 }
 
 function query() {
   return storageService.query(BOOKS_KEY)
   .then((books) => {
-    if (!books || !books.length) {
-      books = gBooks;
+      books = gBooks.map( book => {
+          book.reviews = [];
+          return book;
+        });
       utilService.saveToStorage(BOOKS_KEY, books);
-    }
     return books;
-  });
+  })
 }
 
 function remove(bookId) {

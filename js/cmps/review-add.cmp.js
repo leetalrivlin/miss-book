@@ -3,7 +3,7 @@ import { eventBus } from '../services/event-bus-service.js';
 
 export default {
     name: 'reviewAdd',
-    props: ['bookId'],
+    props: ['bookId', 'reviews'],
     template: `
         <section v-if="bookId" class="review-add-container">
             <h2>Add Your Rating</h2>
@@ -43,7 +43,6 @@ export default {
                 readAt: this.formatDate,
                 txt: '',
             },
-            reviews: [],
         }
     },
     computed: {
@@ -54,59 +53,13 @@ export default {
     },
     methods: {
         save() {
-            console.log("Submiting review...");
-            bookService.addReview(this.bookId, this.review)
-                .then(book => {
-                    bookService.save(book);
-                })
-                .then(book => {
-                    const msg = {
-                        txt: 'Review was saved succesfully',
-                        type: 'success',
-                        link: `/book/:${this.bookId}`,
-                    }
-                    eventBus.$emit('show-msg', msg);
-                    this.$emit('update-details');
-                })
-                .catch(err =>{
-                    console.log(err);
-                    const msg = {
-                        txt: 'Error, please try again later',
-                        type: 'error',
-                        link: '',
-                    }
-                    eventBus.$emit('show-msg', msg)
-                })
+            this.$emit('saveReview', this.review)
         },
         removeReview(reviewIdx) {
-            console.log("removing review...");
-            bookService.removeReview(this.bookId, reviewIdx)
-                .then(book => {
-                    bookService.save(book);
-                })
-                .then(book => {
-                    const msg = {
-                        txt: 'Review removed succesfully',
-                        type: 'success'
-                    }
-                    eventBus.$emit('show-msg', msg);
-                    this.$emit('update-details');
-                })
-                .catch(err =>{
-                    console.log(err);
-                    const msg = {
-                        txt: 'Error, please try again later',
-                        type: 'error'
-                    }
-                    eventBus.$emit('show-msg', msg)
-                })
+            this.$emit('removed', reviewIdx);
         },
-
     },
     created() {
-        const id = this.$route.params.bookId
-            bookService.getById(id)
-                .then(book => this.reviews = book.reviews);
       },
     mounted() {
         this.$refs.fullName.focus();
