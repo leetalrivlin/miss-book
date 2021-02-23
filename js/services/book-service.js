@@ -389,30 +389,34 @@ function getBookFromApi() {
   else {
   return axios.get('https://www.googleapis.com/books/v1/volumes?printType=books&q=HarryPotter')
       .then(res => {
-          console.log('Service Got Res:', res.data);
-          gApiBooks = res.data.items;
-          utilService.saveToStorage(BOOKS_API, gApiBooks)
-          return res.data.items;
+          console.log('Service Got Res:', res.data.items);
+          const apiBooks = res.data.items;
+          let newBooks = apiBooks.map(item => {
+            return {
+              id: item.volumeInfo.id,
+              title: item.volumeInfo.title,
+              subtitle: item.volumeInfo.subtitle,
+              authors: item.volumeInfo.authors || [],
+              publishedDate: item.volumeInfo.publishedDate,
+              description: item.volumeInfo.description,
+              pageCount: item.volumeInfo.pageCount || 120,
+              categories: item.volumeInfo.categories || [],
+              thumbnail: (item.volumeInfo.imageLinks) ? item.volumeInfo.imageLinks.thumbnail : 'http://coding-academy.org/books-photos/20.jpg',
+              language: item.volumeInfo.language,
+              listPrice: {
+                amount: 80,
+                currencyCode: 'USD',
+                isOnSale: true,
+              },
+              reviews: [],
+            }
+            })
+            console.log('newBooks',newBooks);
+            gApiBooks = newBooks;
+            utilService.saveToStorage(BOOKS_API, gApiBooks) //Until now
+          return newBooks;
+          // return res.data.items;
       })
-      .then(items => items.map(({volumeInfo}) => {
-        return {
-          id: '',
-          title: volumeInfo.title,
-          subtitle: '',
-          authors: volumeInfo.authors,
-          publishedDate: volumeInfo.publishedDate,
-          description: volumeInfo.description,
-          pageCount: volumeInfo.pageCount,
-          categories: [],
-          thumbnail: volumeInfo.imageLinks.thumbnail,
-          language: volumeInfo.language,
-          listPrice: {
-            amount: 80,
-            currencyCode: 'USD',
-            isOnSale: true,
-          }
-        }
-        }))
       .catch(err => {
           console.log('Service got Error:', err);
       })
